@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>total</title>
+</head>
+<body>
+<script>
+    let number = parseInt(prompt("Nhập số bất kì: "));
+    let result = 0;
+    for (let i = 2; i < 20; i++) {
+        if (i % number === 0) {
+            result += i;
+        }
+    }
+    document.write(`Tổng các bội số của ${number} nhỏ hơn 20 là ${result}`);
+</script>
+</body>
+</html>
