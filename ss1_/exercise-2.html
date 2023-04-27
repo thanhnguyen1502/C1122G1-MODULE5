@@ -8,10 +8,8 @@
 <script>
     let number = +prompt("Nhập số bất kì: ");
     let result = 0;
-    for (let i = 2; i < 20; i++) {
-        if (i % number === 0) {
-            result += i;
-        }
+    for (let i = 2 * number; i < 20; i += number) {
+        result += i;
     }
     document.write(`Tổng các bội số của ${number} nhỏ hơn 20 là ${result}`);
 </script>
