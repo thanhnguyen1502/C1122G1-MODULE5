@@ -31,28 +31,32 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <div>
         <h1 className='text-center'>Blog Posts</h1>
-            <table className="table">
-                <thead className="table-dark">
-            <tr>
-                <th>ID</th>
-                <th>TITLE</th>
-                <th>CATEGORY</th>
-                <th>TIME</th>
-            </tr>
-            </thead>
-            <tbody>
-            {
-                posts.map((book, index) =>(
-                    <tr key={index}>
-                        <td>{index + 1}</td>
-                        <td>{book.title}</td>
-                        <td>{book.category}</td>
-                        <td>{book.updatedAt}</td>
+        <div className="container-fluid">
+            <div className="row mt-5">
+                <table className="table">
+                    <thead className="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>TITLE</th>
+                        <th>CATEGORY</th>
+                        <th>TIME</th>
                     </tr>
-                ))
-            }
-            </tbody>
-        </table>
+                    </thead>
+                    <tbody>
+                    {
+                        posts.map((book, index) => (
+                            <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{book.title}</td>
+                                <td>{book.category}</td>
+                                <td>{book.updatedAt}</td>
+                            </tr>
+                        ))
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 );
 
