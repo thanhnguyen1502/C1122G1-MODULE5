@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import {Field, Form, Formik} from "formik";
 import {findById, updateBlog} from "./service/BlogService";
+import * as Yup from "yup";
 
 function Update() {
     const {id} = useParams();
@@ -26,6 +27,11 @@ function Update() {
                 <Formik enableReinitialize={true}
                         initialValues={{title: blog.title, category: blog.category, updatedAt: date,
                             content:blog.content, slug: blog.slug}}
+                        validationSchema={Yup.object({
+                            title: Yup.string().required(".Required"),
+                            category: Yup.string().required(".Required"),
+                            content: Yup.string().required(".Required"),
+                        })}
                         onSubmit={(values) => {
                             const update = async () => {
                                 const data = {

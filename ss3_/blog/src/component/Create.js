@@ -1,7 +1,8 @@
 import React from 'react';
-import {Field, Form, Formik} from "formik";
+import {ErrorMessage, Field, Form, Formik} from "formik";
 import {useNavigate} from "react-router-dom";
 import {createBlog} from "./service/BlogService";
+import * as Yup from "yup";
 
 function Create() {
     const navigate = useNavigate()
@@ -11,6 +12,11 @@ function Create() {
     return (
         <>
             <Formik initialValues={{title: '', category: '', updatedAt: date, content:'', slug: ''}}
+                    validationSchema={Yup.object({
+                        title: Yup.string().required(".Required"),
+                        category: Yup.string().required(".Required"),
+                        content: Yup.string().required(".Required"),
+                    })}
                     onSubmit={(values) => {
                         (async () => {
                             await createBlog({...values});
@@ -30,19 +36,21 @@ function Create() {
                                         Title:
                                     </label>
                                     <Field type='text' placeholder='' name='title' className='form-control'/>
-
+                                    <ErrorMessage name="title" component="span" className="form-err" />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="category" className="form-label fw-bold">
                                         Category:
                                     </label>
                                     <Field type='text' placeholder='' name='category' className='form-control'/>
+                                    <ErrorMessage name="category" component="span" className="form-err" />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="content" className="form-label fw-bold">
                                         Content:
                                     </label>
                                     <Field type='text' placeholder='' name='content' className='form-control'/>
+                                    <ErrorMessage name="content" component="span" className="form-err"/>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="slug" className="form-label fw-bold">
