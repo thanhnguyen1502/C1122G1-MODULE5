@@ -1,4 +1,3 @@
-import facilities from "./Facilities";
 import facilitiesList from "./Facilities";
 import {NavLink} from "react-router-dom";
 function FacilityList() {

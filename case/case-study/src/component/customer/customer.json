@@ -1,0 +1,117 @@
+{
+  "customer": [
+    {
+      "name": "Rashford",
+      "gender": 1,
+      "dataOfBirth": "15-2-1997",
+      "idCard": "121212125",
+      "phone": "0902212362",
+      "email": "gea@gmail.com",
+      "address": "Quang nam",
+      "customerType": 1,
+      "id": 1
+    },
+    {
+      "name": "Rashford",
+      "gender": 1,
+      "dataOfBirth": "15-2-1997",
+      "idCard": "121212125",
+      "phone": "0902212362",
+      "email": "gea@gmail.com",
+      "address": "Quang nam",
+      "customerType": 1,
+      "id": 1
+    },
+    {
+      "name": "Rashford",
+      "gender": 1,
+      "dataOfBirth": "15-2-1997",
+      "idCard": "121212125",
+      "phone": "0902212362",
+      "email": "gea@gmail.com",
+      "address": "Quang nam",
+      "customerType": 1,
+      "id": 1
+    },
+    {
+      "name": "Rashford",
+      "gender": 1,
+      "dataOfBirth": "15-2-1997",
+      "idCard": "121212125",
+      "phone": "0902212362",
+      "email": "gea@gmail.com",
+      "address": "Quang nam",
+      "customerType": 1,
+      "id": 1
+    },
+    {
+      "name": "Rashford",
+      "gender": 1,
+      "dataOfBirth": "15-2-1997",
+      "idCard": "121212125",
+      "phone": "0902212362",
+      "email": "gea@gmail.com",
+      "address": "Quang nam",
+      "customerType": 1,
+      "id": 1
+    },
+    {
+      "name": "Rashford",
+      "gender": 1,
+      "dataOfBirth": "15-2-1997",
+      "idCard": "121212125",
+      "phone": "0902212362",
+      "email": "gea@gmail.com",
+      "address": "Quang nam",
+      "customerType": 1,
+      "id": 1
+    },
+    {
+      "name": "Rashford",
+      "gender": 1,
+      "dataOfBirth": "15-2-1997",
+      "idCard": "121212125",
+      "phone": "0902212362",
+      "email": "gea@gmail.com",
+      "address": "Quang nam",
+      "customerType": 1,
+      "id": 1
+    }
+  ],
+  "customerType": [
+    {
+      "id": 1,
+      "name": "Diamond"
+    },
+    {
+      "id": 2,
+      "name": "Gold"
+    },
+    {
+      "id": 3,
+      "name": "Plantinium"
+    },
+    {
+      "id": 4,
+      "name": "Silver"
+    },
+    {
+      "id": 5,
+      "name": "Member"
+    }
+  ],
+  "gender": [
+    {
+      "id": 1,
+      "name": "Men"
+    },
+    {
+      "id": 2,
+      "name": "Girl"
+    },
+    {
+      "id": 3,
+      "name": "LGBT"
+    }
+  ]
+}

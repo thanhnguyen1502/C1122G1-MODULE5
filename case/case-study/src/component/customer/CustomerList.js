@@ -2,7 +2,6 @@ import {NavLink, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import * as CustomerService from "./service/CustomerService";
 import ModalDelete from "./ModalDelete";
-import {findAll} from "./service/CustomerService";
 
 function CustomerList() {
     const navigate = useNavigate();
