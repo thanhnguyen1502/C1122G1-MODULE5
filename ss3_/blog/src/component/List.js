@@ -5,23 +5,39 @@ import {NavLink, useNavigate} from "react-router-dom";
 
 function List() {
     const navigate = useNavigate();
+    const [idDelete, setIdDelete] = useState('');
+    const [nameDelete, setNameDelete] = useState('')
+    const blogList = async () => {
+        const result = await getBlog();
+        setBlog(result)
+    }
+
     const [blog, setBlog] = useState([]);
+
     useEffect(() => {
         (async () => {
             const blog = await getBlog();
-
             setBlog(blog.data);
         })();
     }, [])
+
 
     const handleUpdate = (id) => {
         navigate(`/update/${id}`);
     };
 
+
     const handleDelete = async (id) => {
         await removeBlog(id)
         setBlog(blog.filter(p => p.id !== id))
     }
+
+    const getInfodelete = (id, name) => {
+        setIdDelete(id)
+        setNameDelete(name)
+    }
+
+
     return (
         <div>
             <div>
@@ -57,14 +73,17 @@ function List() {
                                 <td>{blogs.title}</td>
                                 <td>{blogs.category}</td>
                                 <td>{blogs.updatedAt}</td>
-
                                 <td>
-                                    <button className='btn btn-success' onClick={()=> handleUpdate(blogs.id)}>Edit</button>
+                                    <button className='btn btn-success' onClick={() => handleUpdate(blogs.id)}>Edit
+                                    </button>
 
                                 </td>
                                 <td>
                                     <button className='btn btn-danger'
-                                            onClick={() => handleDelete(blogs.id)}>
+                                            type="button"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal"
+                                            onClick={() => getInfodelete(blogs.id, blogs.title)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                              fill="currentColor"
                                              className="bi bi-trash" viewBox="0 0 16 16">
@@ -80,6 +99,48 @@ function List() {
                     }
                     </tbody>
                 </table>
+                {/* modal */}
+                <div
+                    className="modal fade"
+                    id="exampleModal"
+                    tabindex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                >
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h1 className="modal-title fs-5" id="exampleModalLabel">
+                                    Delete post
+                                </h1>
+                                <button
+                                    type="button"
+                                    className="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                ></button>
+                            </div>
+                            <div className="modal-body">Do you want to delete {nameDelete} post ?</div>
+                            <div className="modal-footer">
+                                <button
+                                    type="button"
+                                    className="btn btn-secondary"
+                                    data-bs-dismiss="modal"
+                                >
+                                    Close
+                                </button>
+                                <button
+                                    onClick={() => handleDelete(idDelete)}
+                                    data-bs-dismiss="modal"
+                                    type="button"
+                                    className="btn btn-danger"
+                                >
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );

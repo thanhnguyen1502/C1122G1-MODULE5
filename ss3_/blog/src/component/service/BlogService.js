@@ -6,10 +6,12 @@ export const getBlog = () => {
 
 export const createBlog = (values) =>{
     return axios.post(`http://localhost:3000/posts`,{...values})
+    alert("create success")
 }
 
 export const removeBlog = (id) => {
     return axios.delete(`http://localhost:3000/posts/${id}`)
+    alert("Delete Success");
 }
 
 export const findById = (id) => {
