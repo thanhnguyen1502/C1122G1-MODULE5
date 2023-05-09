@@ -5,11 +5,11 @@ import {Link, NavLink} from "react-router-dom";
 function List() {
     const [blogList, setBlogList] = useState([]);
     useEffect(() => {
-        const fetchApi = async () => {
+        const blog = async () => {
             const result = await blogService.findAll();
             setBlogList(result);
         };
-        fetchApi();
+        blog();
     }, []);
     return (
         <>
