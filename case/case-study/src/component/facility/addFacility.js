@@ -18,21 +18,21 @@
 //     let navigate = useNavigate()
 //     useEffect(() => {
 //         const getfacilitiesType = async () => {
-//             const rs = await facilitiesService.getFacilitiesType()
+//             const rs = await getfacilitiesType()
 //             setFacilitiesType(rs)
 //         }
 //         getfacilitiesType()
 //     }, [])
 //     useEffect(() => {
 //         const getfacilityStandard = async () => {
-//             const rs = await facilitiesService.getFacilitiesStandard()
+//             const rs = await getfacilityStandard()
 //             setFacilityStandard(rs)
 //         }
 //         getfacilityStandard()
 //     }, [])
 //     useEffect(() => {
 //         const getfacilityRentType = async () => {
-//             const rs = await facilitiesService.getFacilitiesRentType()
+//             const rs = await getfacilityRentType()
 //             setFacilityRentType(rs)
 //         }
 //         getfacilityRentType()
@@ -40,7 +40,7 @@
 //
 //     useEffect(() => {
 //         const getfacilityService = async () => {
-//             const rs = await facilitiesService.getFacilityService()
+//             const rs = await getfacilityService()
 //             setFacilityService(rs)
 //         }
 //         getfacilityService()

@@ -22,7 +22,7 @@
     "yup": "^1.1.1"
   },
   "scripts": {
-    "json-server": "json-server -p 3001 --watch .src/component/customer/customer.json",
+    "json-server": "json-server -p 3001 --watch src/component/customer/customer.json",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

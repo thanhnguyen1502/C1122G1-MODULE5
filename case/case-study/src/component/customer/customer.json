@@ -56,17 +56,6 @@
       "id": 1
     },
     {
-      "name": "Rashford",
-      "gender": 1,
-      "dataOfBirth": "15-2-1997",
-      "idCard": "121212125",
-      "phone": "0902212362",
-      "email": "gea@gmail.com",
-      "address": "Quang nam",
-      "customerType": 1,
-      "id": 1
-    },
-    {
       "id": 2,
       "name": "akira phan",
       "gender": 1,
