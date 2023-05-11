@@ -48,6 +48,26 @@ function CustomerUpdate() {
                             address: customer.address,
                             customerType: customer.customerType
                         }}
+                        validationSchema={
+                            Yup.object(
+                                {
+                                    name: Yup.string().required("Please enter"),
+                                    idCard: Yup.string()
+                                        .required("Required.")
+                                        .matches(/^[0-9]{9}$|^[0-9]{9}$/, "Invalid identity format."),
+                                    phone: Yup.string()
+                                        .required("Required.")
+                                        .matches(
+                                            /^(090|091|\(84\)\+90|\(84\)\+91)[0-9]{7}$/,
+                                            "Invalid phone number format."
+                                        ),
+                                    email: Yup.string()
+                                        .required("Required.")
+                                        .email("Invalid email format."),
+                                    address: Yup.string().required("Required.")
+                                }
+                            )
+                        }
                         onSubmit={(values) => {
                             const update = async () => {
                                 const data = {
@@ -81,7 +101,8 @@ function CustomerUpdate() {
                                             <label htmlFor="dataOfBirth" className="form-label fw-bold">
                                                 Birth Day:
                                             </label>
-                                            <Field type='text' placeholder='' name='dataOfBirth' className='form-control'/>
+                                            <Field type='text' placeholder='' name='dataOfBirth'
+                                                   className='form-control'/>
                                         </div>
                                         <div className="mb-3">
                                             <label className="form-label fw-bold">

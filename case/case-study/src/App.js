@@ -9,6 +9,7 @@ import CustomerCreate from "./component/customer/CustomerCreate";
 import CustomerUpdate from "./component/customer/CustomerUpdate";
 import ContractList from "./component/contract/ContractList";
 import Footer from "./Footer";
+import {ToastContainer} from "react-toastify";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
 
       </Routes>
       <Footer/>
+        <ToastContainer />
     </>
   );
 }

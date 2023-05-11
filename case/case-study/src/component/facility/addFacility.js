@@ -1,226 +1,461 @@
-import {Field, Form, Formik} from "formik";
-import * as Yup from "yup";
-import * as CustomerService from "../customer/service/CustomerService";
-import {useNavigate} from "react-router-dom";
-
-import React from 'react';
-
-function AddFacility() {
-    let navigate = useNavigate();
-    return (
-        <>
-            <Formik
-                initialValues={{name: '', gender: '', dataOfBirth: '', idCard: '', phone: '', email: '', address: ''}}
-                validationSchema={Yup.object({
-                    name: Yup.string()
-                        .required("Required.")
-                        .matches(
-                            /^[A-Z][a-z]*(\s[A-Z][a-z]*)*$/,
-                            "Invalid name format."
-                        ),
-                    dateOfBirth: Yup.string().required("Required."),
-                    identity: Yup.string()
-                        .required("Required.")
-                        .matches(/^[0-9]{9}$|^[0-9]{12}$/, "Invalid identity format."),
-                    phoneNumber: Yup.string()
-                        .required("Required.")
-                        .matches(
-                            /^(090|091|\(84\)\+90|\(84\)\+91)[0-9]{7}$/,
-                            "Invalid phone number format."
-                        ),
-                    email: Yup.string()
-                        .required("Required.")
-                        .email("Invalid email format."),
-                    address: Yup.string().required("Required."),
-                })}
-                onSubmit={(values) => {
-                    const create = async () => {
-                        await CustomerService.create(values)
-                        navigate('/')
-                    }
-                    create()
-                        .then()
-                }}
-            >
-                {() => (
-                    <Form>
-                        <div className="row mt-5">
-                            <div className="col-lg-3"/>
-                            <div style={{background: "#e9f2ef"}} className="col-lg-6 shadow-lg">
-                                <h1 className="text-center">Create Facility Form</h1>
-                                <form
-                                    action="/ServiceFurama?action=addNewFacility"
-                                    method="post"
-                                    className="mt-5"
-                                >
-                                    <div className="mb-3" id="facilityType">
-                                        <div className="form-check-inline">
-                                            <b>Choice Facility Type:</b>
-                                        </div>
-                                        <div
-                                            className="form-check form-check-inline "
-                                            onClick="displayForm(villa.value)"
-                                        >
-                                            <Field type='text' placeholder='' name='facilityType' className='form-control' />
-
-                                            <input
-                                                required=""
-                                                className="form-check-input"
-                                                type="radio"
-                                                name="facilityType"
-                                                id="villa"
-                                                defaultValue={1}
-                                            />
-                                            <label className="form-check-label" htmlFor="villa">
-                                                Villa
-                                            </label>
-                                        </div>
-                                        <div
-                                            className="form-check form-check-inline"
-                                            onClick="displayForm(house.value)"
-                                        >
-                                            <input
-                                                required=""
-                                                className="form-check-input"
-                                                type="radio"
-                                                name="facilityType"
-                                                id="house"
-                                                defaultValue={2}
-                                            />
-                                            <label className="form-check-label" htmlFor="house">
-                                                House
-                                            </label>
-                                        </div>
-                                        <div
-                                            className="form-check form-check-inline"
-                                            onClick="displayForm(room.value)"
-                                        >
-                                            <input
-                                                required=""
-                                                className="form-check-input"
-                                                type="radio"
-                                                name="facilityType"
-                                                id="room"
-                                                defaultValue={3}
-                                            />
-                                            <label className="form-check-label" htmlFor="room">
-                                                Room
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="name" className="form-label">
-                                            <b>Name:</b>
-                                        </label>
-                                        <Field type='text' placeholder='' name='name' className='form-control' />
-
-                                    </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="area" className="form-label">
-                                            <b>Area:</b>
-                                        </label>
-                                        <Field type='text' placeholder='' name='area' className='form-control' />
-
-                                    </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="cost" className="form-label">
-                                            <b>Cost:</b>
-                                        </label>
-                                        <Field type='text' placeholder='' name='cost' className='form-control' />
-
-                                    </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="maxPeople" className="form-label">
-                                            <b>Max People:</b>
-                                        </label>
-                                        <Field type='text' placeholder='' name='maxPeople' className='form-control' />
-
-                                    </div>
-                                    <div className="mb-3">
-                                        <label htmlFor="rentType" className="form-label">
-                                            <b>Rent Type:</b>
-                                        </label>
-                                        <select
-                                            id="rentType"
-                                            name="rentType"
-                                            className="form-select"
-                                            aria-label="Default select example"
-                                        >
-                                            <option value={1}>year</option>
-                                            <option value={2}>month</option>
-                                            <option value={3}>day</option>
-                                            <option value={4}>hour</option>
-                                        </select>
-                                    </div>
-                                    <div className="mb-3" id="opt1" style={{display: "none"}}>
-                                        <label htmlFor="roomStandard" className="form-label">
-                                            <b>Room Standard:</b>
-                                        </label>
-                                        <select
-                                            id="roomStandard"
-                                            name="standard"
-                                            className="form-select"
-                                            aria-label="Default select example"
-                                        >
-                                            <option value="Normal">normal</option>
-                                            <option value="Vip">vip</option>
-                                        </select>
-                                    </div>
-                                    <div className="mb-3" id="opt2" style={{display: "none"}}>
-                                        <label htmlFor="poolArea" className="form-label">
-                                            <b>Pool Area:</b>
-                                        </label>
-                                        <Field type='text' placeholder='' name='poolArea' className='form-control' />
-
-                                    </div>
-                                    <div className="mb-3" id="opt3" style={{display: "none"}}>
-                                        <label htmlFor="numberOfFloors" className="form-label">
-                                            <b>Number Of Floors:</b>
-                                        </label>
-                                        <input
-                                            type="number"
-                                            defaultValue={0}
-                                            name="floors"
-                                            className="form-control"
-                                            id="numberOfFloors"
-                                        />
-                                    </div>
-                                    <div className="mb-3" id="opt4" style={{display: "none"}}>
-                                        <label htmlFor="descriptionOtherConvenience" className="form-label">
-                                            <b>Description Other Convenience:</b>
-                                        </label>
-                                        <input
-                                            type="text"
-                                            name="convenience"
-                                            className="form-control"
-                                            id="descriptionOtherConvenience"
-                                        />
-                                    </div>
-                                    <div className="mb-3" id="opt5" style={{display: "none"}}>
-                                        <label htmlFor="freeServiceIncluded" className="form-label">
-                                            <b>Free Service Included:</b>
-                                        </label>
-                                        <input
-                                            type="text"
-                                            name="free"
-                                            className="form-control"
-                                            id="freeServiceIncluded"
-                                        />
-                                    </div>
-                                    <div>
-                                        <button type="submit" className="btn btn-primary mb-3">
-                                            Add New
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                            <div className="col-lg-3"/>
-                        </div>
-                    </Form>
-                )}
-            </Formik>
-        </>
-    );
-}
-
-export default AddFacility;
+// import { useEffect, useState } from "react";
+// import { ErrorMessage, Field, Form, Formik } from "formik";
+// import * as facilitiesService from '../service/facilityService'
+// import { toast } from "react-toastify";
+// import { useNavigate } from "react-router-dom";
+// import * as Yup from 'yup'
+// import { Oval } from "react-loader-spinner";
+//
+//
+//
+//
+// export default function FacilityCreate() {
+//     const [facilitiesType, setFacilitiesType] = useState()
+//     const [facilityService, setFacilityService] = useState([])
+//     const [facilityStandard, setFacilityStandard] = useState([])
+//     const [facilityRentType, setFacilityRentType] = useState()
+//     const [facility, setFacility] = useState('Phòng')
+//     let navigate = useNavigate()
+//     useEffect(() => {
+//         const getfacilitiesType = async () => {
+//             const rs = await facilitiesService.getFacilitiesType()
+//             setFacilitiesType(rs)
+//         }
+//         getfacilitiesType()
+//     }, [])
+//     useEffect(() => {
+//         const getfacilityStandard = async () => {
+//             const rs = await facilitiesService.getFacilitiesStandard()
+//             setFacilityStandard(rs)
+//         }
+//         getfacilityStandard()
+//     }, [])
+//     useEffect(() => {
+//         const getfacilityRentType = async () => {
+//             const rs = await facilitiesService.getFacilitiesRentType()
+//             setFacilityRentType(rs)
+//         }
+//         getfacilityRentType()
+//     }, [])
+//
+//     useEffect(() => {
+//         const getfacilityService = async () => {
+//             const rs = await facilitiesService.getFacilityService()
+//             setFacilityService(rs)
+//         }
+//         getfacilityService()
+//     }, [])
+//     if(!facilitiesType){
+//         return null
+//     }
+//     if(!facilityRentType){
+//         return null
+//     }
+//     return (
+//
+//         <>
+//             <Formik initialValues={{
+//                 name: '',
+//                 area: '',
+//                 price: '',
+//                 rentType: facilityRentType[0]?.id,
+//                 img: '',
+//                 people:'',
+//                 facilitiesType: facilitiesType[0]?.id,
+//                 standard: null,
+//                 description: null,
+//                 poolarea: null,
+//                 numberFloors: null,
+//                 serviceFree: null,
+//                 facilityService: []
+//             }}
+//
+//                     validationSchema={Yup.object(
+//                         {
+//                             name: Yup.string().required('Không được bỏ trống').matches(/^([a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s]+)$/,'Tên phải đúng định dạng VD: BIỆT THỰ...'),
+//                             area: Yup.string().required('Không được bỏ trống').matches(/^[1-9]\d*$/,'Diệt tích phải là số nguyên dương'),
+//                             price: Yup.string().required('Không được bỏ trống').matches(/^[1-9]\d*$/,'Số tiền phải là số nguyên dương'),
+//                             img: Yup.string().required('Không được bỏ trống'),
+//                             people: Yup.string().required('Không được bỏ trống').matches(/^[1-9]\d*$/,'Số lượng người là số nguyên dương'),
+//                             description: facility=='Biệt thự' && Yup.string().required('Không được bỏ trống') || facility=='Căn hộ' && Yup.string().required('Không được bỏ trống'),
+//                             poolarea: facility=='Biệt thự' && Yup.string().required('Không được bỏ trống').matches(/^[1-9]\d*$/,'Số tầng phải là số nguyên dương'),
+//                             numberFloors: facility=='Biệt thự' && Yup.string().required('Không được bỏ trống') || facility=='Căn hộ' && Yup.string().required('Không được bỏ trống').matches(/^[1-9]\d*$/,'Diệt tích phải là số nguyên dương'),
+//                             serviceFree: facility=='Phòng' && Yup.string().required('Không được bỏ trống'),
+//                         }
+//                     )}
+//                     onSubmit={(value, { setSubmitting }) => {
+//                         const create = async () => {
+//                             await facilitiesService.save(value)
+//                             setSubmitting(false)
+//                             toast("Thêm mới thành công")
+//                             navigate('/facility-list')
+//                         }
+//                         create()
+//                     }}
+//             >
+//                 {
+//                     ({ isSubmitting }) => (
+//                         <Form>
+//                             <div
+//                                 className="row mx-0"
+//                                 style={{ marginTop: 96, backgroundColor: "rgb(232, 235, 219)" }}>
+//                                 <div className="col-5">
+//                                     {
+//                                         facility == 'Phòng'
+//                                         &&
+//                                         <div>
+//                                             <h2 className="text-center fw-bold mt-3" >Thêm Phòng Mới</h2>
+//                                         </div>
+//                                     }
+//
+//                                     {
+//                                         facility === 'Biệt thự'
+//                                         &&
+//                                         <div>
+//                                             <h2 className="text-center fw-bold mt-3">Thêm Biệt Thự Mới</h2>
+//                                         </div>
+//                                     }
+//                                     {
+//                                         facility === 'Căn hộ'
+//                                         &&
+//                                         <div>
+//                                             <h2 className="text-center fw-bold mt-3">Thêm Căn Hộ Mới</h2>
+//                                         </div>
+//                                     }
+//
+//                                     <div className="dropdown text-center mt-3" style={{ paddingRight: 360 }}>
+//                                         <button
+//                                             className="btn btn-secondary dropdown-toggle"
+//                                             type="button"
+//                                             data-bs-toggle="dropdown"
+//                                             aria-expanded="false"
+//                                         >
+//                                             Danh sách cơ sở
+//                                         </button>
+//                                         <ul className="dropdown-menu">
+//                                             {
+//                                                 facilitiesType.map((facilities, index) => (
+//                                                         <li key={index}>
+//                                                             <Field component="a" name="facilitiesType" value={facilities.id} className="dropdown-item" onClick={() => {
+//                                                                 setFacility(facilities.name)
+//                                                             }}>
+//                                                                 {facilities.name}
+//                                                             </Field>
+//                                                         </li>
+//                                                     )
+//                                                 )
+//                                             }
+//                                         </ul>
+//                                     </div>
+//                                     <div className="d-flex justify-content-center mt-3">
+//                                         <table className="" style={{ width: 500 }}>
+//                                             <tbody>
+//                                             <tr style={{ height: 60 }}>
+//                                                 <th>
+//                                                     <label className="fs-5" htmlFor="">
+//                                                         Tên dịch vụ:
+//                                                     </label>
+//                                                 </th>
+//                                                 <td>
+//                                                     <Field
+//                                                         type="text"
+//                                                         className="form-control "
+//                                                         name="name"
+//                                                         placeholder="Nhập tên dịch vụ"
+//                                                     />
+//                                                 </td>
+//                                             </tr>
+//                                             <tr>
+//                                                 <th></th>
+//                                                 <ErrorMessage name="name" className="text-danger" component="span" />
+//                                             </tr>
+//                                             <tr style={{ height: 60 }}>
+//                                                 <th>
+//                                                     <label className="fs-5" htmlFor="">
+//                                                         Loại dịch vụ:
+//                                                     </label>
+//                                                 </th>
+//                                                 <td>
+//                                                     <Field component="select" name="facilitiesType" className="form-select" id="floatingSelect" aria-label="Floating label select example">
+//                                                         {
+//                                                             facilitiesType.map((facilitiesTypes) => (
+//                                                                 <option   key={facilitiesTypes.id} value={facilitiesTypes.id}>{facilitiesTypes.name}</option>
+//                                                             ))
+//
+//                                                         }
+//                                                     </Field>
+//                                                 </td>
+//                                             </tr>
+//                                             <tr style={{ height: 60 }}>
+//                                                 <th>
+//                                                     <label className="fs-5" htmlFor="">
+//                                                         Diện tích sử dụng:
+//                                                     </label>
+//                                                 </th>
+//                                                 <td>
+//                                                     <Field
+//                                                         type="text"
+//                                                         className="form-control"
+//                                                         name="area"
+//                                                         placeholder="Nhập diện tích sử dụng"
+//                                                     />
+//                                                 </td>
+//                                             </tr>
+//                                             <tr>
+//                                                 <th></th>
+//                                                 <ErrorMessage name="area" className="text-danger" component="span" />
+//                                             </tr>
+//                                             <tr style={{ height: 60 }}>
+//                                                 <th>
+//                                                     <label className="fs-5" htmlFor="">
+//                                                         Chi phí thuê:
+//                                                     </label>
+//                                                 </th>
+//                                                 <td>
+//                                                     <Field
+//                                                         type="text"
+//                                                         className="form-control"
+//                                                         name="price"
+//                                                         placeholder="Nhập chi phí thuê"
+//                                                     />
+//                                                 </td>
+//                                             </tr>
+//                                             <tr>
+//                                                 <th></th>
+//                                                 <ErrorMessage name="price" className="text-danger" component="span" />
+//                                             </tr>
+//                                             <tr style={{ height: 60 }}>
+//                                                 <th>
+//                                                     <label className="fs-5" htmlFor="">
+//                                                         Số lượng người:
+//                                                     </label>
+//                                                 </th>
+//                                                 <td>
+//                                                     <Field
+//                                                         type="text"
+//                                                         className="form-control"
+//                                                         name="people"
+//                                                         placeholder="Nhập số lượng người tối đa"
+//                                                     />
+//                                                 </td>
+//                                             </tr>
+//                                             <tr>
+//                                                 <th></th>
+//                                                 <ErrorMessage name="people" className="text-danger" component="span" />
+//                                             </tr>
+//                                             <tr style={{ height: 60 }}>
+//                                                 <th>
+//                                                     <label className="fs-5" htmlFor="">
+//                                                         Kiểu thuê:
+//                                                     </label>
+//                                                 </th>
+//                                                 <td>
+//                                                     <Field component="select" name="rentType" className="form-select" id="floatingSelect" aria-label="Floating label select example">
+//                                                         {
+//                                                             facilityRentType.map((facilityRentTypes) => (
+//                                                                 <option key={facilityRentTypes.id} value={facilityRentTypes.id}>{facilityRentTypes.name}</option>
+//                                                             ))
+//                                                         }
+//                                                     </Field>
+//                                                 </td>
+//                                             </tr>
+//                                             <tr style={{ height: 60 }}>
+//                                                 <th>
+//                                                     <label className="fs-5" htmlFor="">
+//                                                         Hình ảnh:
+//                                                     </label>
+//                                                 </th>
+//                                                 <td>
+//                                                     <Field
+//                                                         type="text"
+//                                                         className="form-control "
+//                                                         name="img"
+//                                                         placeholder="Nhập đường link hình ảnh"
+//                                                     />
+//                                                 </td>
+//                                             </tr>
+//                                             <tr>
+//                                                 <th></th>
+//                                                 <ErrorMessage name="img" className="text-danger" component="span" />
+//                                             </tr>
+//                                             <tr style={facility === 'Biệt thự' || facility === 'Căn hộ' ?
+//                                                 { height: 60 } : { display: 'none' }}>
+//                                                 <th>
+//                                                     <label className="fs-5" htmlFor="">
+//                                                         Tiêu chuẩn phòng:
+//                                                     </label>
+//                                                 </th>
+//                                                 <td>
+//                                                     <Field component="select" name="standard" className="form-select" id="floatingSelect" aria-label="Floating label select example">
+//                                                         {
+//                                                             facilityStandard.map((facilityStandards) => (
+//                                                                 <option key={facilityStandards.id} value={facilityStandards.id}>{facilityStandards.name}</option>
+//                                                             ))
+//                                                         }
+//                                                     </Field>
+//                                                 </td>
+//                                             </tr>
+//                                             <tr style={facility === 'Biệt thự' || facility === 'Căn hộ' ?
+//                                                 { height: 60 } : { display: 'none' }}>
+//                                                 <th>
+//                                                     <label className="fs-5" htmlFor="">
+//                                                         Mô tả tiện nghi khác:
+//                                                     </label>
+//                                                 </th>
+//                                                 <td>
+//                                                     <Field
+//                                                         type="text"
+//                                                         className="form-control "
+//                                                         name="description"
+//                                                         placeholder="Nhập mô tả tiện nghi khác"
+//                                                     />
+//                                                 </td>
+//                                             </tr>
+//                                             {
+//                                                 facility === 'Biệt thự' &&
+//                                                 <tr>
+//                                                     <th></th>
+//                                                     <ErrorMessage name="description" className="text-danger" component="span" />
+//                                                 </tr>
+//                                             }
+//                                             {
+//                                                 facility === 'Căn hộ' &&
+//                                                 <tr>
+//                                                     <th></th>
+//                                                     <ErrorMessage name="description" className="text-danger" component="span" />
+//                                                 </tr>
+//                                             }
+//                                             {
+//                                                 facility=='Biệt thự' &&
+//                                                 <tr style={{ height: 60 }}>
+//                                                     <th>
+//                                                         <label className="fs-5" htmlFor="">
+//                                                             Diện tích hồ bơi:
+//                                                         </label>
+//                                                     </th>
+//                                                     <td>
+//                                                         <Field
+//                                                             type="text"
+//                                                             className="form-control "
+//                                                             name="poolarea"
+//                                                             placeholder="Nhập diện tích hồ bơi"
+//                                                         />
+//                                                     </td>
+//                                                 </tr>
+//                                             }
+//                                             {
+//                                                 facility === 'Biệt thự' &&
+//                                                 <tr>
+//                                                     <th></th>
+//                                                     <ErrorMessage name="poolarea" className="text-danger" component="span" />
+//                                                 </tr>
+//                                             }
+//                                             <tr style={facility === 'Biệt thự' || facility === 'Căn hộ' ?
+//                                                 { height: 60 } : { display: 'none' }}>
+//                                                 <th>
+//                                                     <label className="fs-5" htmlFor="">
+//                                                         Số tầng:
+//                                                     </label>
+//                                                 </th>
+//                                                 <td>
+//                                                     <Field
+//                                                         type="text"
+//                                                         className="form-control "
+//                                                         name="numberFloors"
+//                                                         placeholder="Nhập số tầng"
+//                                                     />
+//                                                 </td>
+//                                             </tr>
+//                                             {
+//                                                 facility === 'Biệt thự' &&
+//                                                 <tr>
+//                                                     <th></th>
+//                                                     <ErrorMessage name="numberFloors" className="text-danger" component="span" />
+//                                                 </tr>
+//                                             }
+//                                             {
+//                                                 facility === 'Căn hộ' &&
+//                                                 <tr>
+//                                                     <th></th>
+//                                                     <ErrorMessage name="numberFloors" className="text-danger" component="span" />
+//                                                 </tr>
+//                                             }
+//
+//                                             <tr style={facility === 'Phòng' ?
+//                                                 { height: 60 } : { display: 'none' }}>
+//                                                 <th>
+//                                                     <label className="fs-5" htmlFor="">
+//                                                         Dịch vụ miễn phí:
+//                                                     </label>
+//                                                 </th>
+//                                                 <td>
+//                                                     <Field
+//                                                         type="text"
+//                                                         className="form-control "
+//                                                         name="serviceFree"
+//                                                         placeholder="Nhập dịch vụ miễn phí đi kèm"
+//                                                     />
+//                                                 </td>
+//                                             </tr>
+//                                             {
+//                                                 facility === 'Phòng' &&
+//                                                 <tr>
+//                                                     <th></th>
+//                                                     <ErrorMessage name="serviceFree" className="text-danger" component="span" />
+//                                                 </tr>
+//                                             }
+//
+//                                             <tr style={{ height: 60 }}>
+//                                                 <th>
+//                                                     <label className="fs-5" htmlFor="">
+//                                                         Dịch vụ đi kèm:
+//                                                     </label>
+//                                                 </th>
+//                                                 <td>
+//                                                     <Field component="select" multiple name="facilityService" className="form-select" id="floatingSelect" aria-label="Floating label select example" size={3}>
+//                                                         {
+//                                                             facilityService.map((facilityServices) => (
+//                                                                 <option key={facilityServices.id} value={facilityServices.id}>{facilityServices.name}</option>
+//                                                             ))
+//                                                         }
+//                                                     </Field>
+//                                                 </td>
+//                                             </tr>
+//                                             {
+//                                                 isSubmitting ? <Oval
+//                                                     height={80}
+//                                                     width={40}
+//                                                     color="grey"
+//                                                     wrapperStyle={{}}
+//                                                     wrapperClass=""
+//                                                     visible={true}
+//                                                     ariaLabel='oval-loading'
+//                                                     secondaryColor="grey"
+//                                                     strokeWidth={2}
+//                                                     strokeWidthSecondary={2}
+//                                                 /> : <tr style={{ height: 120 }}>
+//                                                     <td>
+//                                                         <button className="btn btn-primary float-end">Xác nhận</button>
+//                                                     </td>
+//                                                 </tr>
+//                                             }
+//
+//                                             </tbody>
+//                                         </table>
+//                                     </div>
+//                                 </div>
+//                                 <div className="col-7 p-0">
+//                                     <img
+//                                         className="w-100 h-100"
+//                                         src="https://khunghiduong.vn/wp-content/uploads/2017/07/can-ho-1-phong-ngu-ariyana_2.jpg"
+//                                         alt=""
+//                                     />
+//                                 </div>
+//                             </div>
+//                         </Form>
+//                     )
+//                 }
+//             </Formik>
+//         </>
+//     )
+// }

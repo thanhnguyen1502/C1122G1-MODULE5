@@ -9,20 +9,20 @@ function CustomerList() {
     const [customerType, setCustomerType] = useState([])
     const [gender, setGender] = useState([])
 
-        const list = async () => {
-            const result = await CustomerService.findAll()
-            setCustomer(result)
-        }
+    const list = async () => {
+        const result = await CustomerService.findAll()
+        setCustomer(result)
+    }
 
-        const listCustomerType = async () => {
-            const result = await CustomerService.findAllCustomerType()
-            setCustomerType(result)
-        }
+    const listCustomerType = async () => {
+        const result = await CustomerService.findAllCustomerType()
+        setCustomerType(result)
+    }
 
-        const listGender = async () => {
-            const result = await CustomerService.findAllGender()
-            setGender(result)
-        }
+    const listGender = async () => {
+        const result = await CustomerService.findAllGender()
+        setGender(result)
+    }
     useEffect(() => {
 
         listGender()
@@ -33,11 +33,6 @@ function CustomerList() {
             .then()
     }, [])
 
-    // create
-    // const handleDelete = async (id) => {
-    //     await CustomerService.remove(id)
-    //     setCustomer(customer.filter(customer => customer.id !== id))
-    // };
 
     const handleUpdate = (id) => {
         navigate(`/customer-update/${id}`);
@@ -104,7 +99,7 @@ function CustomerList() {
                             <th scope="col"/>
                             <th scope="col">
                                 <button type='button' className='btn btn-success me-2'>
-                                    <NavLink to='/customer-create'>
+                                    <NavLink to='/facility-create'>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                              fill="currentColor"
                                              className="bi bi-cloud-plus" viewBox="0 0 16 16">
@@ -140,7 +135,7 @@ function CustomerList() {
                                         </td>
                                         <td>
                                             <button className='btn btn-secondary'
-                                            onClick={()=> handleUpdate(value.id)}>
+                                                    onClick={() => handleUpdate(value.id)}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                      fill="currentColor"
                                                      className="bi bi-pencil" viewBox="0 0 16 16">
@@ -152,8 +147,9 @@ function CustomerList() {
                                         </td>
                                         <td>
                                             <button
-                                                className="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalDelete"
-                                                    onClick={() => getPropsCustomer(value.id, value.name)}>
+                                                className="btn btn-secondary" data-bs-toggle="modal"
+                                                data-bs-target="#modalDelete"
+                                                onClick={() => getPropsCustomer(value.id, value.name)}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                      fill="currentColor"
                                                      className="bi bi-trash" viewBox="0 0 16 16">
